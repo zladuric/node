@@ -8,11 +8,11 @@ const path = require('path');
 // Basic usage tests.
 assert.throws(function() {
   fs.watchFile('./some-file');
-}, /^Error: "watchFile\(\)" requires a listener function$/);
+}, common.expectsError({code: 'ERR_MISSING_WATCHFILE_LISTENER', type: 'Error'});
 
 assert.throws(function() {
   fs.watchFile('./another-file', {}, 'bad listener');
-}, /^Error: "watchFile\(\)" requires a listener function$/);
+}, common.expectsError({code: 'ERR_MISSING_WATCHFILE_LISTENER', type: 'Error'});
 
 assert.throws(function() {
   fs.watchFile(new Object(), common.mustNotCall());
